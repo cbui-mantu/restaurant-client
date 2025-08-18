@@ -1,0 +1,31 @@
+<script setup></script>
+
+<template>
+  <div>
+    <nav
+      style="padding: 12px; border-bottom: 1px solid #eee; margin-bottom: 16px"
+    >
+      <router-link to="/">Restaurants</router-link>
+      <span style="margin: 0 8px">|</span>
+      <router-link to="/new">Create</router-link>
+    </nav>
+    <main style="padding: 0 12px">
+      <router-view />
+    </main>
+  </div>
+</template>
+
+<style scoped>
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.vue:hover {
+  filter: drop-shadow(0 0 2em #42b883aa);
+}
+</style>
