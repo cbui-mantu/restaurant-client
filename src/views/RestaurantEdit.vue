@@ -1,8 +1,12 @@
 <script setup>
 import { onMounted, reactive, ref } from "vue";
-import { getRestaurant, updateRestaurant } from "../api";
+import {
+  getRestaurantById,
+  updateRestaurant,
+} from "../controllers/restaurantController";
 import { useRoute, useRouter } from "vue-router";
 import RestaurantForm from "../components/RestaurantForm.vue";
+import { isAdmin } from "../models/userModel";
 
 const route = useRoute();
 const router = useRouter();
@@ -21,7 +25,7 @@ const model = reactive({
 
 onMounted(async () => {
   loading.value = true;
-  const data = await getRestaurant(id);
+  const data = await getRestaurantById(id);
   if (!data) {
     alert("Not found");
     router.replace({ name: "list" });
@@ -59,6 +63,9 @@ async function onSubmit(payload) {
 <template>
   <div>
     <h2>Edit Restaurant</h2>
+    <div v-if="!isAdmin" style="color: #b00; margin-bottom: 8px">
+      You do not have permission to edit restaurants.
+    </div>
     <div v-if="loading">Loading...</div>
     <RestaurantForm
       v-else
